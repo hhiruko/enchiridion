@@ -1,8 +1,25 @@
+import { useEffect } from "preact/hooks";
 import { Landmark, Scroll } from "lucide-preact";
 import { Page } from "./Page";
 import { ThemeButton } from "./ThemeButton";
+import { CollectionStorage } from "../models/CollectionStorage";
+import { Enchiridion } from "../models/Enchiridion";
 
 export function App() {
+    const enchiridionStorage = new CollectionStorage('enchiridion');
+
+    useEffect(() => {
+        async function loadData() {
+            if (enchiridionStorage.keys().length === 0) {
+                const data = await Enchiridion.load("enchiridion.json");
+                Object.entries(data).forEach(([k,v]) => {
+                    enchiridionStorage.set(k, v);
+                })
+            }
+        }
+        loadData();
+    }, []);
+
     const handleCredits = () => {
         const creditsContainer = document.querySelector('.credits-container');
         if (!creditsContainer) {
