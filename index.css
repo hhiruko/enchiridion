@@ -1,3 +1,8 @@
+:root {
+    --focus: #007bff;
+    --danger: #dc3545;
+}
+
 #theme-button {
     all: unset;
     display: flex;

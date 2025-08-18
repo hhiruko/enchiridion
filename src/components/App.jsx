@@ -1,11 +1,13 @@
 import { useEffect } from "preact/hooks";
 import { Landmark, Scroll } from "lucide-preact";
-import { Page } from "./Page";
 import { ThemeButton } from "./ThemeButton";
 import { CollectionStorage } from "../models/CollectionStorage";
 import { Enchiridion } from "../models/Enchiridion";
+import { Handbook } from "./Handbook";
+import { Storage } from "../models/Storage";
 
 export function App() {
+    const storage = Storage;
     const enchiridionStorage = new CollectionStorage('enchiridion');
 
     useEffect(() => {
@@ -47,7 +49,7 @@ export function App() {
                 <p>Written A.D. 135</p>
                 <p>Translated by Elizabeth Carter</p>
             </div>
-            <Page />
+            <Handbook enchiridionStorage={enchiridionStorage} storage={storage} />
         </>
     );
 }
