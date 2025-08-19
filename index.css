@@ -1,6 +1,6 @@
 :root {
-    --focus: #007bff;
     --danger: #dc3545;
+    --white: white;
 }
 
 #theme-button {
@@ -55,4 +55,43 @@ header h1 {
   0% { transform: rotate(0deg); }
   50%  { transform: rotate(180deg); }
   100% { transform: rotate(360deg); }
+}
+
+.page-content {
+    padding: 12px;
+    text-align: justify;
+}
+
+.copy-button,
+.copy-button:hover,
+.copy-button:focus,
+.copy-button:active {
+  all: unset;
+  display: flex;
+  cursor: pointer;
+  margin-top: 32px;
+  height: fit-content;
+}
+
+.page-container {
+    display: flex;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.page-button {
+    display: flex;
+}
+
+.page-button:focus {
+    box-shadow: none;
+}
+
+.page-button.active {
+    background-color: var(--button-hover);
+    color: var(--white);
 }

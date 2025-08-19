@@ -56,21 +56,21 @@ export function Handbook({enchiridionStorage, storage}) {
                         </p>
                     ))}
                 </div>
-                <button onClick={handleCopy}><ClipboardCopy /></button>
+                <button className="copy-button" onClick={handleCopy}><ClipboardCopy /></button>
             </div>
-            <div>
+            <div className="pagination-container">
                 {page > 1 && (
-                    <button onClick={() => handleSetPage(parseInt(page) - 1)}><ArrowLeft /></button>
+                    <button className="page-button" onClick={() => handleSetPage(parseInt(page) - 1)}><ArrowLeft /></button>
                 )}
                 
                 {visiblePages.map((p) => (
-                    <button key={p} onClick={() => handleSetPage(p)} className={`page-button ${p === page ? "active-page-button" : ""}`}>
+                    <button key={p} onClick={() => handleSetPage(p)} className={`page-button ${parseInt(p) === parseInt(page) ? "active" : ""}`}>
                         {p}
                     </button>
                 ))}
 
                 {page < totalPages && (
-                    <button onClick={() => handleSetPage(parseInt(page) + 1)}><ArrowRight /></button>
+                    <button className="page-button" onClick={() => handleSetPage(parseInt(page) + 1)}><ArrowRight /></button>
                 )}
             </div>
         </>
