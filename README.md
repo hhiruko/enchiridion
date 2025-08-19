@@ -1,6 +1,6 @@
-# Static PWA Template
+# Epicteti Enchiridion
 
-A lightweight, static **Progressive Web App (PWA)** template for quickly building and deploying offline-capable web apps.
+A lightweight, static Progressive Web App (PWA) version of **Epictetus’ Enchiridion**, built for quick reading, offline access, and a clean distraction-free experience.
 
 ### 🚀 Core Features
 - Offline support via caching
