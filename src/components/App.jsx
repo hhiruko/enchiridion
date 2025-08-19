@@ -1,5 +1,5 @@
-import { useEffect } from "preact/hooks";
-import { Landmark, Scroll } from "lucide-preact";
+import { useEffect, useState } from "preact/hooks";
+import { Landmark, Scroll, Loader } from "lucide-preact";
 import { ThemeButton } from "./ThemeButton";
 import { CollectionStorage } from "../models/CollectionStorage";
 import { Enchiridion } from "../models/Enchiridion";
@@ -9,21 +9,32 @@ import { Storage } from "../models/Storage";
 export function App() {
     const storage = Storage;
     const enchiridionStorage = new CollectionStorage('enchiridion');
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        async function loadData() {
-            if (enchiridionStorage.keys().length === 0) {
-                const data = await Enchiridion.load("enchiridion.json");
+        const filename = "enchiridion.json";
+
+        async function loadData(filename) {
+            const fileModified = await Enchiridion.lastModified(filename);
+            const modified = storage.get(Enchiridion.MODIFIED_KEY);
+
+            if (!modified || fileModified !== modified || enchiridionStorage.keys().length === 0) {
+                const data = await Enchiridion.load(filename);
                 Object.entries(data).forEach(([k,v]) => {
                     enchiridionStorage.set(k, v);
                 })
             }
+            storage.set(Enchiridion.MODIFIED_KEY, fileModified);
+
+            setLoaded(true);
         }
-        loadData();
+
+        loadData(filename);
     }, []);
 
     const handleCredits = () => {
         const creditsContainer = document.querySelector('.credits-container');
+
         if (!creditsContainer) {
             return;
         }
@@ -35,6 +46,20 @@ export function App() {
         }
     };
 
+    useEffect(() => {
+        const creditsContainer = document.querySelector('.credits-container');
+
+        if (!creditsContainer) {
+            return;
+        }
+
+        if(loaded){
+            creditsContainer.style.display = 'none';
+        } else {
+            creditsContainer.style.display = 'block';
+        }
+    }, [loaded]);
+
     return (
         <>
             <header>
@@ -44,12 +69,20 @@ export function App() {
                     <Scroll onClick={handleCredits} />
                 </div>
             </header>
+            
             <div className="credits-container">
                 <h2>By Epictetus</h2>
                 <p>Written A.D. 135</p>
                 <p>Translated by Elizabeth Carter</p>
             </div>
-            <Handbook enchiridionStorage={enchiridionStorage} storage={storage} />
+
+            { loaded ? (
+                <Handbook enchiridionStorage={enchiridionStorage} storage={storage} />
+            ) : (
+                <div className="loading-container">
+                    <Loader className="loader-icon" />
+                </div>
+            )}
         </>
     );
 }

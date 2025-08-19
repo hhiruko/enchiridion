@@ -1,4 +1,4 @@
-import { useState, useRef } from "preact/hooks";
+import { useState } from "preact/hooks";
 import { ClipboardCopy, ArrowLeft, ArrowRight } from "lucide-preact";
 
 export function Handbook({enchiridionStorage, storage}) {
@@ -15,7 +15,8 @@ export function Handbook({enchiridionStorage, storage}) {
     }
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(enchiridionStorage.get(page)).then(() => {
+        const text = document.querySelector('.page-content').innerText ?? enchiridionStorage.get(page);
+        navigator.clipboard.writeText(text).then(() => {
             alert("Copied!");
         });
     };
@@ -43,7 +44,18 @@ export function Handbook({enchiridionStorage, storage}) {
     return (
         <>
             <div className="page-container">
-                <p>{enchiridionStorage.get(page)}</p>
+                <div className="page-content">
+                    {enchiridionStorage.get(page).split("\n\n").map((para, idx) => (
+                        <p key={idx}>
+                            {para.split("\n").map((line, i) => (
+                                <span key={i}>
+                                    {line}
+                                    <br />
+                                </span>
+                            ))}
+                        </p>
+                    ))}
+                </div>
                 <button onClick={handleCopy}><ClipboardCopy /></button>
             </div>
             <div>
