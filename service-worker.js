@@ -75,11 +75,11 @@
   "/enchiridion/cdn/water.system.min.css",
   "/enchiridion/cdn/water.light.min.css",
   "/enchiridion/cdn/water.dark.min.css",
-  "/enchiridion/assets/index-DWnfErwl.js",
-  "/enchiridion/assets/index-BuEO4PcM.css",
+  "/enchiridion/assets/index-BR9Y3FpW.js",
+  "/enchiridion/assets/index-5IUv3geX.css",
   "/enchiridion/"
 ];
-    const CACHE_NAME = 'v2025-08-19T05:43:57.250Z';
+    const CACHE_NAME = 'v2025-08-19T05:48:06.494Z';
 
     self.addEventListener('install', event => {
         self.skipWaiting();
