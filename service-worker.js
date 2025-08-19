@@ -79,7 +79,7 @@
   "/enchiridion/assets/index-LtVpfqkl.css",
   "/enchiridion/"
 ];
-    const CACHE_NAME = 'v2025-08-19T06:07:51.972Z';
+    const CACHE_NAME = 'v2025-08-19T06:41:12.162Z';
 
     self.addEventListener('install', event => {
         self.skipWaiting();
