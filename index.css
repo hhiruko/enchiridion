@@ -78,6 +78,7 @@ header h1 {
 }
 
 .pagination-container {
+    max-width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 24px;
