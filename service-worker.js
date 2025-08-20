@@ -1,7 +1,6 @@
 
     const assets = [
   "/enchiridion/index.html",
-  "/enchiridion/enchiridion.json",
   "/enchiridion/favicons/yandex-browser-manifest.json",
   "/enchiridion/favicons/yandex-browser-50x50.png",
   "/enchiridion/favicons/mstile-70x70.png",
@@ -75,11 +74,11 @@
   "/enchiridion/cdn/water.system.min.css",
   "/enchiridion/cdn/water.light.min.css",
   "/enchiridion/cdn/water.dark.min.css",
-  "/enchiridion/assets/index-rqqfO_e5.js",
-  "/enchiridion/assets/index-LtVpfqkl.css",
+  "/enchiridion/assets/index-DqtuABNI.js",
+  "/enchiridion/assets/index-D0n3z4i2.css",
   "/enchiridion/"
 ];
-    const CACHE_NAME = 'v2025-08-19T06:41:12.162Z';
+    const CACHE_NAME = 'v2025-08-20T04:12:01.249Z';
 
     self.addEventListener('install', event => {
         self.skipWaiting();
