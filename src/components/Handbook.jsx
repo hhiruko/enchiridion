@@ -1,21 +1,21 @@
 import { useState } from "preact/hooks";
 import { ClipboardCopy, ArrowLeft, ArrowRight } from "lucide-preact";
 
-export function Handbook({enchiridionStorage, storage}) {
-    const STORAGE_KEY = 'enchiridion-pagination';
+export function Handbook({enchiridion, storage}) {
+    const PAGINATION_KEY = 'enchiridion-pagination';
 
-    const [page, setPage] = useState(storage.get(STORAGE_KEY) ?? 1);
-    const totalPages = enchiridionStorage.keys().length;
+    const [page, setPage] = useState(storage.get(PAGINATION_KEY) ?? 1);
+    const totalPages = Object.keys(enchiridion).length;
 
     const handleSetPage = (page) => {
         if(page >= 1 && page <= totalPages) {
-            storage.set(STORAGE_KEY, page);
+            storage.set(PAGINATION_KEY, page);
             setPage(page);
         }
     }
 
     const handleCopy = () => {
-        const text = document.querySelector('.page-content').innerText ?? enchiridionStorage.get(page);
+        const text = document.querySelector('.page-content').innerText ?? enchiridion[page];
         navigator.clipboard.writeText(text).then(() => {
             alert("Copied!");
         });
@@ -45,7 +45,7 @@ export function Handbook({enchiridionStorage, storage}) {
         <>
             <div className="page-container">
                 <div className="page-content">
-                    {enchiridionStorage.get(page).split("\n\n").map((para, idx) => (
+                    {enchiridion[page].split("\n\n").map((para, idx) => (
                         <p key={idx}>
                             {para.split("\n").map((line, i) => (
                                 <span key={i}>

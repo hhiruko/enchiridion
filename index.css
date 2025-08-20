@@ -42,21 +42,6 @@ header h1 {
     cursor: pointer;
 }
 
-.loading-container {
-    text-align: center;
-    margin-top: 24px;
-}
-
-.loader-icon {
-    animation: spin 3s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  50%  { transform: rotate(180deg); }
-  100% { transform: rotate(360deg); }
-}
-
 .page-content {
     padding: 12px;
     text-align: justify;

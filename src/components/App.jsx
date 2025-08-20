@@ -1,49 +1,18 @@
-import { useEffect, useState } from "preact/hooks";
-import { Landmark, Scroll, Loader } from "lucide-preact";
+import { Landmark, Scroll} from "lucide-preact";
 import { ThemeButton } from "./ThemeButton";
-import { CollectionStorage } from "../models/CollectionStorage";
-import { Enchiridion } from "../models/Enchiridion";
 import { Handbook } from "./Handbook";
 import { Storage } from "../models/Storage";
+import enchiridion from "../json/enchiridion.json";
+import { useEffect, useState } from "preact/hooks";
 
 export function App() {
     const storage = Storage;
-    const enchiridionStorage = new CollectionStorage('enchiridion');
-    const [loaded, setLoaded] = useState(false);
+    const CREDITS_KEY = 'enchiridion-show-credits';
+    const [showCredits, setShowCredits] = useState(JSON.parse(storage.get(CREDITS_KEY)) ?? true);
 
-    useEffect(() => {
-        const filename = "enchiridion.json";
-
-        async function loadData(filename) {
-            const fileModified = await Enchiridion.lastModified(filename);
-            const modified = storage.get(Enchiridion.MODIFIED_KEY);
-
-            if (!modified || fileModified !== modified || enchiridionStorage.keys().length === 0) {
-                const data = await Enchiridion.load(filename);
-                Object.entries(data).forEach(([k,v]) => {
-                    enchiridionStorage.set(k, v);
-                })
-            }
-            storage.set(Enchiridion.MODIFIED_KEY, fileModified);
-
-            setLoaded(true);
-        }
-
-        loadData(filename);
-    }, []);
-
-    const handleCredits = () => {
-        const creditsContainer = document.querySelector('.credits-container');
-
-        if (!creditsContainer) {
-            return;
-        }
-
-        if(creditsContainer.style.display === 'block') {
-            creditsContainer.style.display = 'none';
-        } else {
-            creditsContainer.style.display = 'block';
-        }
+    const saveShowCredits = (status) => {
+        setShowCredits(status);
+        storage.set(CREDITS_KEY, status);
     };
 
     useEffect(() => {
@@ -53,12 +22,12 @@ export function App() {
             return;
         }
 
-        if(loaded){
-            creditsContainer.style.display = 'none';
-        } else {
+        if(showCredits) {
             creditsContainer.style.display = 'block';
+        } else {
+            creditsContainer.style.display = 'none';
         }
-    }, [loaded]);
+    }, [showCredits]);
 
     return (
         <>
@@ -66,7 +35,7 @@ export function App() {
                 <h1><Landmark width={30} height={30} />The Enchiridion</h1>
                 <div id="header-right-container">
                     <ThemeButton />
-                    <Scroll onClick={handleCredits} />
+                    <Scroll onClick={() => {saveShowCredits(!showCredits)}} />
                 </div>
             </header>
             
@@ -76,13 +45,7 @@ export function App() {
                 <p>Translated by Elizabeth Carter</p>
             </div>
 
-            { loaded ? (
-                <Handbook enchiridionStorage={enchiridionStorage} storage={storage} />
-            ) : (
-                <div className="loading-container">
-                    <Loader className="loader-icon" />
-                </div>
-            )}
+            <Handbook enchiridion={enchiridion} storage={storage} />
         </>
     );
 }
