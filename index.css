@@ -63,7 +63,7 @@ header h1 {
 }
 
 .pagination-container {
-    max-width: 100%;
+    flex-wrap: wrap;
     display: flex;
     justify-content: center;
     margin-top: 24px;
@@ -80,4 +80,5 @@ header h1 {
 .page-button.active {
     background-color: var(--button-hover);
     color: var(--white);
+
 }
