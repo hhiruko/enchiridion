@@ -76,7 +76,7 @@
   "/enchiridion/assets/index-D0n3z4i2.css",
   "/enchiridion/"
 ];
-    const CACHE_NAME = 'v2025-09-05T07:21:59.324Z';
+    const CACHE_NAME = 'v2025-09-05T07:28:55.005Z';
 
     self.addEventListener('install', event => {
         self.skipWaiting();
