@@ -71,12 +71,11 @@
   "/enchiridion/favicons/android-chrome-256x256.png",
   "/enchiridion/favicons/android-chrome-192x192.png",
   "/enchiridion/favicons/android-chrome-144x144.png",
-  "/enchiridion/cdn/water.min.css",
-  "/enchiridion/assets/index-D_hYjbcX.js",
-  "/enchiridion/assets/index-D0n3z4i2.css",
+  "/enchiridion/assets/index-rNuyiNTz.js",
+  "/enchiridion/assets/index-KfMyAuFO.css",
   "/enchiridion/"
 ];
-    const CACHE_NAME = 'v2025-09-05T07:28:55.005Z';
+    const CACHE_NAME = 'v2025-09-11T11:53:11.577Z';
 
     self.addEventListener('install', event => {
         self.skipWaiting();
