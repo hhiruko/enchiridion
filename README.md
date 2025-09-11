@@ -19,7 +19,7 @@ A lightweight, static Progressive Web App (PWA) version of **Epictetus’ Enchir
 - [Glob](https://github.com/isaacs/node-glob)
 - [Favicons](https://github.com/itgalaxy/favicons)
 - [Lucide-preact](https://lucide.dev/guide/packages/lucide-preact)
-- [Water.css](https://watercss.kognise.dev/)
+- [Water.css](https://github.com/hhiruko/water.css)
 
 ---
 
@@ -54,4 +54,5 @@ To enable deployment:
 
 
 ### 📝 License
+
 MIT
